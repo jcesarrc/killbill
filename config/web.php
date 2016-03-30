@@ -1,11 +1,15 @@
 <?php
 
 $params = require(__DIR__ . '/params.php');
+$modules = require(__DIR__ . '/modules.php');
 
 $config = [
     'id' => 'basic',
+    'name' => 'Cobros Academia',
     'basePath' => dirname(__DIR__),
     'bootstrap' => ['log'],
+    'language' => 'es',
+    'modules' => $modules,
     'components' => [
         'request' => [
             // !!! insert a secret key in the following (if it is empty) - this is required by cookie validation
@@ -22,11 +26,22 @@ $config = [
             'errorAction' => 'site/error',
         ],
         'mailer' => [
-            'class' => 'yii\swiftmailer\Mailer',
+            //'class' => 'yii\swiftmailer\Mailer',
             // send all mails to a file by default. You have to set
             // 'useFileTransport' to false and configure a transport
             // for the mailer to send real emails.
-            'useFileTransport' => true,
+            //'useFileTransport' => true,
+            'class' => 'yii\swiftmailer\Mailer',
+            'viewPath' => '@app/mailer',
+            'useFileTransport' => false,
+            'transport' => [
+                'class' => 'Swift_SmtpTransport',
+                'host' => 'smtp.gmail.com',
+                'username' => 'pruebasdesw@gmail.com',
+                'password' => 'cafecolombia2014',
+                'port' => '587',
+                'encryption' => 'tls',
+            ],
         ],
         'log' => [
             'traceLevel' => YII_DEBUG ? 3 : 0,

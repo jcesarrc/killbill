@@ -16,7 +16,9 @@ use yii\widgets\ActiveForm;
 
     <?= $form->field($model, 'direccion')->textInput(['maxlength' => true]) ?>
 
-    <?= $form->field($model, 'fecha_desde')->textInput() ?>
+    <?= $form->field($model, 'fecha_desde')->widget(DateControl::classname(), [
+        'type' => DateControl::FORMAT_DATE,
+    ]) ?>
 
     <?= $form->field($model, 'email')->textInput(['maxlength' => true]) ?>
 
