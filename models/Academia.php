@@ -57,6 +57,7 @@ class Academia extends \yii\db\ActiveRecord
             [['numero_carros', 'numero_motos', 'dias_por_ciclo', 'dia_notificacion_previa', 'dia_notificacion_corte', 'dia_notificacion_preaviso', 'dia_suspension', 'estado', 'notificar_en_plataforma', 'notificar_al_correo'], 'integer'],
             [['costo_por_ciclo'], 'number'],
             [['nombre', 'direccion', 'email'], 'string', 'max' => 255],
+            [['email'], 'email'],
             [['nombre'], 'unique']
         ];
     }
