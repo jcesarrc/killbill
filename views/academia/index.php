@@ -1,7 +1,9 @@
 <?php
 
+use app\models\Estados;
 use yii\grid\GridView;
 use yii\helpers\Html;
+use yii\helpers\Url;
 
 /* @var $this yii\web\View */
 /* @var $searchModel app\models\AcademiaSearch */
@@ -24,24 +26,46 @@ $this->params['breadcrumbs'][] = $this->title;
         'filterModel' => $searchModel,
         'columns' => [
             ['class' => 'yii\grid\SerialColumn'],
-
-            'id',
             'nombre',
-            'direccion',
-            'fecha_desde',
+            'fecha_desde:date',
             'email:email',
-            // 'numero_carros',
-            // 'numero_motos',
-            // 'costo_por_ciclo',
-            // 'fecha_inicial_facturacion',
-            // 'dias_por_ciclo',
-            // 'dia_notificacion_previa',
-            // 'dia_notificacion_corte',
-            // 'dia_notificacion_preaviso',
-            // 'dia_suspension',
-            // 'estado',
-            // 'notificar_en_plataforma',
-            // 'notificar_al_correo',
+            'costo_por_ciclo:currency',
+            [
+                'attribute' => 'dia_corte',
+                'value' => function ($d) {
+                    return $d->dia_corte . ' c/mes';
+                }
+            ],
+            [
+                'attribute' => 'dia_suspension',
+                'value' => function ($d) {
+                    return $d->dia_suspension . ' c/mes';
+                }
+            ],
+            [
+                'attribute' => 'estado',
+                'format' => 'raw',
+                'value' => function ($d) {
+                    switch ($d->estado) {
+                        case Estados::ACTIVO :
+                            return Html::tag("span", "Activo", ["class" => "label label-success"]);
+                            break;
+                        case Estados::SUSPENDIDO:
+                            return Html::tag("span", "Suspendido", ["class" => "label label-danger"]);
+                            break;
+                        case Estados::INFORMADO:
+                            return Html::tag("span", "Informado", ["class" => "label label-warning"]);
+                            break;
+                    }
+                }
+            ],
+            [
+                'label' => '$',
+                'format' => 'html',
+                'value' => function ($d) {
+                    return Html::a("$", Url::to(['pagos/index', 'id' => $d->id]), ["class" => "btn btn-xs btn-info"]);
+                }
+            ],
 
             ['class' => 'yii\grid\ActionColumn'],
         ],

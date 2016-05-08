@@ -9,6 +9,7 @@ use yii\widgets\ActiveForm;
 /* @var $this yii\web\View */
 /* @var $model app\models\Academia */
 /* @var $form yii\widgets\ActiveForm */
+
 ?>
 
 <div class="academia-form">
@@ -64,10 +65,6 @@ use yii\widgets\ActiveForm;
                 ]) ?>
             </div>
 
-            <div class="col-sm-2">
-                <?= $form->field($model, 'dias_por_ciclo')->textInput() ?>
-            </div>
-
             <div class="col-sm-3">
                 <?= $form->field($model, 'costo_por_ciclo')->widget(MaskMoney::classname(), [
                     'pluginOptions' => [
@@ -89,50 +86,111 @@ use yii\widgets\ActiveForm;
             <h3 class="panel-title">Control facturación</h3>
         </div>
         <div class="panel-body">
-            <div class="col-sm-2">
-                <?= $form->field($model, 'dia_notificacion_previa')->textInput() ?>
-            </div>
 
-            <div class="col-sm-2">
-                <?= $form->field($model, 'dia_notificacion_corte')->textInput() ?>
-            </div>
+            <table class="table">
 
-            <div class="col-sm-2">
-                <?= $form->field($model, 'dia_notificacion_preaviso')->textInput() ?>
-            </div>
 
-            <div class="col-sm-2">
-                <?= $form->field($model, 'dia_suspension')->textInput() ?>
-            </div>
+                <tr>
+                    <th width="25%">Evento</th>
+                    <th width="8%">Día</th>
+                    <th width="40%">Periodicidad</th>
+                    <th>Notificar en plataforma</th>
+                    <th>Notificar al correo electrónico</th>
+                </tr>
+
+                <tr>
+                    <td>Notificación previa a la fecha de corte</td>
+                    <td><?= $form->field($model, 'dia_notificacion_previa')->textInput(['maxlength' => true])->label(false) ?></td>
+                    <td><?= Html::tag('span', 'días antes de la fecha de corte') ?></td>
+                    <td><?= $form->field($model, 'notificar_previa_plataforma')->widget(SwitchInput::classname(), [
+                            'pluginOptions' => [
+                                'size' => 'small',
+                                'onColor' => 'success',
+                                'offColor' => 'danger',
+                            ]
+                        ])->label(false) ?></td>
+                    <td><?= $form->field($model, 'notificar_previa_correo')->widget(SwitchInput::classname(), [
+                            'pluginOptions' => [
+                                'size' => 'small',
+                                'onColor' => 'success',
+                                'offColor' => 'danger',
+                            ]
+                        ])->label(false) ?></td>
+                </tr>
+
+
+                <tr>
+                    <td>Día de corte</td>
+                    <td><?= $form->field($model, 'dia_corte')->textInput(['maxlength' => true])->label(false) ?></td>
+                    <td><?= Html::tag('span', 'de cada mes') ?></td>
+                    <td>
+                        <?= $form->field($model, 'notificar_corte_plataforma')->widget(SwitchInput::classname(), [
+                            'pluginOptions' => [
+                                'size' => 'small',
+                                'onColor' => 'success',
+                                'offColor' => 'danger',
+                            ]
+                        ])->label(false) ?>
+                    </td>
+                    <td><?= $form->field($model, 'notificar_corte_correo')->widget(SwitchInput::classname(), [
+                            'pluginOptions' => [
+                                'size' => 'small',
+                                'onColor' => 'success',
+                                'offColor' => 'danger',
+                            ]
+                        ])->label(false) ?></td>
+                </tr>
+
+
+                <tr>
+                    <td>Día de preaviso de suspensión</td>
+                    <td><?= $form->field($model, 'dia_notificacion_presuspension')->textInput(['maxlength' => true])->label(false) ?></td>
+                    <td><?= Html::tag('span', 'días después de la fecha de corte') ?></td>
+                    <td><?= $form->field($model, 'notificar_presuspension_plataforma')->widget(SwitchInput::classname(), [
+                            'pluginOptions' => [
+                                'size' => 'small',
+                                'onColor' => 'success',
+                                'offColor' => 'danger',
+                            ]
+                        ])->label(false) ?></td>
+                    <td>
+                        <?= $form->field($model, 'notificar_presuspension_correo')->widget(SwitchInput::classname(), [
+                            'pluginOptions' => [
+                                'size' => 'small',
+                                'onColor' => 'success',
+                                'offColor' => 'danger',
+                            ]
+                        ])->label(false) ?>
+                    </td>
+                </tr>
+
+                <tr>
+                    <td>Día de suspensión</td>
+                    <td><?= $form->field($model, 'dia_suspension')->textInput(['maxlength' => true])->label(false) ?></td>
+                    <td><?= Html::tag('span', 'días después de la fecha de corte') ?></td>
+                    <td><?= $form->field($model, 'notificar_suspension_plataforma')->widget(SwitchInput::classname(), [
+                            'pluginOptions' => [
+                                'size' => 'small',
+                                'onColor' => 'success',
+                                'offColor' => 'danger',
+                            ]
+                        ])->label(false) ?></td>
+                    <td>
+                        <?= $form->field($model, 'notificar_suspension_correo')->widget(SwitchInput::classname(), [
+                            'pluginOptions' => [
+                                'size' => 'small',
+                                'onColor' => 'success',
+                                'offColor' => 'danger',
+                            ]
+                        ])->label(false) ?>
+                    </td>
+                </tr>
+
+            </table>
+
         </div>
-    </div>
-</div>
 
-<div class="panel panel-default">
-    <div class="panel-heading">
-        <h3 class="panel-title">Notificaciones sistema</h3>
-    </div>
-    <div class="panel-body">
 
-        <div class="col-sm-3">
-            <?= $form->field($model, 'notificar_en_plataforma')->widget(SwitchInput::classname(), [
-                'pluginOptions' => [
-                    'size' => 'small',
-                    'onColor' => 'success',
-                    'offColor' => 'danger',
-                ]
-            ]) ?>
-        </div>
-
-        <div class="col-sm-3">
-            <?= $form->field($model, 'notificar_al_correo')->widget(SwitchInput::classname(), [
-                'pluginOptions' => [
-                    'size' => 'small',
-                    'onColor' => 'success',
-                    'offColor' => 'danger',
-                ]
-            ]) ?>
-        </div>
     </div>
 </div>
 

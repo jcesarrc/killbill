@@ -16,14 +16,19 @@ use Yii;
  * @property integer $numero_motos
  * @property string $costo_por_ciclo
  * @property string $fecha_inicial_facturacion
- * @property integer $dias_por_ciclo
  * @property integer $dia_notificacion_previa
- * @property integer $dia_notificacion_corte
- * @property integer $dia_notificacion_preaviso
+ * @property integer $dia_notificacion_presuspension
  * @property integer $dia_suspension
+ * @property integer $dia_corte
  * @property integer $estado
- * @property integer $notificar_en_plataforma
- * @property integer $notificar_al_correo
+ * @property integer $notificar_previa_plataforma
+ * @property integer $notificar_previa_correo
+ * @property integer $notificar_corte_plataforma
+ * @property integer $notificar_corte_correo
+ * @property integer $notificar_presuspension_plataforma
+ * @property integer $notificar_presuspension_correo
+ * @property integer $notificar_suspension_plataforma
+ * @property integer $notificar_suspension_correo
  *
  * @property Pago[] $pagos
  */
@@ -52,13 +57,12 @@ class Academia extends \yii\db\ActiveRecord
     public function rules()
     {
         return [
-            [['nombre', 'direccion', 'fecha_desde', 'email', 'costo_por_ciclo', 'fecha_inicial_facturacion', 'dias_por_ciclo', 'dia_notificacion_previa', 'dia_notificacion_corte', 'dia_notificacion_preaviso', 'dia_suspension', 'notificar_en_plataforma', 'notificar_al_correo'], 'required'],
+            [['nombre', 'direccion', 'fecha_desde', 'email', 'dia_corte', 'costo_por_ciclo', 'fecha_inicial_facturacion', 'dia_notificacion_previa', 'dia_notificacion_presuspension', 'dia_suspension', 'notificar_previa_plataforma', 'notificar_previa_correo'], 'required'],
             [['fecha_desde', 'fecha_inicial_facturacion'], 'safe'],
-            [['numero_carros', 'numero_motos', 'dias_por_ciclo', 'dia_notificacion_previa', 'dia_notificacion_corte', 'dia_notificacion_preaviso', 'dia_suspension', 'estado', 'notificar_en_plataforma', 'notificar_al_correo'], 'integer'],
+            [['numero_carros', 'numero_motos', 'dia_notificacion_previa', 'dia_notificacion_presuspension', 'dia_suspension', 'estado', 'notificar_previa_plataforma', 'notificar_previa_correo', 'notificar_corte_plataforma', 'notificar_corte_correo', 'notificar_presuspension_plataforma', 'notificar_presuspension_correo', 'notificar_suspension_plataforma', 'notificar_suspension_correo'], 'integer'],
             [['costo_por_ciclo'], 'number'],
             [['nombre', 'direccion', 'email'], 'string', 'max' => 255],
-            [['email'], 'email'],
-            [['nombre'], 'unique']
+            [['nombre'], 'unique'],
         ];
     }
 
@@ -75,17 +79,23 @@ class Academia extends \yii\db\ActiveRecord
             'email' => Yii::t('app', 'Email'),
             'numero_carros' => Yii::t('app', 'Numero Carros'),
             'numero_motos' => Yii::t('app', 'Numero Motos'),
-            'costo_por_ciclo' => Yii::t('app', 'Costo Por Ciclo'),
+            'costo_por_ciclo' => Yii::t('app', 'Valor a pagar por mes'),
             'fecha_inicial_facturacion' => Yii::t('app', 'Fecha Inicial Facturacion'),
-            'dias_por_ciclo' => Yii::t('app', 'Dias Por Ciclo'),
             'dia_notificacion_previa' => Yii::t('app', 'Dia Notificacion Previa'),
-            'dia_notificacion_corte' => Yii::t('app', 'Dia Notificacion Corte'),
-            'dia_notificacion_preaviso' => Yii::t('app', 'Dia Notificacion Preaviso'),
+            'dia_notificacion_presuspension' => Yii::t('app', 'Dia Notificacion Presuspension'),
+            'dia_corte' => Yii::t('app', 'Dia de corte'),
             'dia_suspension' => Yii::t('app', 'Dia Suspension'),
             'estado' => Yii::t('app', 'Estado'),
-            'notificar_en_plataforma' => Yii::t('app', 'Notificar En Plataforma'),
-            'notificar_al_correo' => Yii::t('app', 'Notificar Al Correo'),
+            'notificar_previa_plataforma' => Yii::t('app', 'Notificar Previa Plataforma'),
+            'notificar_previa_correo' => Yii::t('app', 'Notificar Previa Correo'),
+            'notificar_corte_plataforma' => Yii::t('app', 'Notificar Corte Plataforma'),
+            'notificar_corte_correo' => Yii::t('app', 'Notificar Corte Correo'),
+            'notificar_presuspension_plataforma' => Yii::t('app', 'Notificar Presuspension Plataforma'),
+            'notificar_presuspension_correo' => Yii::t('app', 'Notificar Presuspension Correo'),
+            'notificar_suspension_plataforma' => Yii::t('app', 'Notificar Suspension Plataforma'),
+            'notificar_suspension_correo' => Yii::t('app', 'Notificar Suspension Correo'),
         ];
+
     }
 
     /**

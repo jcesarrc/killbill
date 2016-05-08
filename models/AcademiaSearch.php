@@ -17,7 +17,7 @@ class AcademiaSearch extends Academia
     public function rules()
     {
         return [
-            [['id', 'numero_carros', 'numero_motos', 'dias_por_ciclo', 'dia_notificacion_previa', 'dia_notificacion_corte', 'dia_notificacion_preaviso', 'dia_suspension', 'estado', 'notificar_en_plataforma', 'notificar_al_correo'], 'integer'],
+            [['id', 'numero_carros', 'numero_motos'], 'integer'],
             [['nombre', 'direccion', 'fecha_desde', 'email', 'fecha_inicial_facturacion'], 'safe'],
             [['costo_por_ciclo'], 'number'],
         ];
@@ -62,14 +62,6 @@ class AcademiaSearch extends Academia
             'numero_motos' => $this->numero_motos,
             'costo_por_ciclo' => $this->costo_por_ciclo,
             'fecha_inicial_facturacion' => $this->fecha_inicial_facturacion,
-            'dias_por_ciclo' => $this->dias_por_ciclo,
-            'dia_notificacion_previa' => $this->dia_notificacion_previa,
-            'dia_notificacion_corte' => $this->dia_notificacion_corte,
-            'dia_notificacion_preaviso' => $this->dia_notificacion_preaviso,
-            'dia_suspension' => $this->dia_suspension,
-            'estado' => $this->estado,
-            'notificar_en_plataforma' => $this->notificar_en_plataforma,
-            'notificar_al_correo' => $this->notificar_al_correo,
         ]);
 
         $query->andFilterWhere(['like', 'nombre', $this->nombre])

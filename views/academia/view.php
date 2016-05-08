@@ -37,14 +37,6 @@ $this->params['breadcrumbs'][] = $this->title;
             'numero_motos',
             'costo_por_ciclo',
             'fecha_inicial_facturacion',
-            'dias_por_ciclo',
-            'dia_notificacion_previa',
-            'dia_notificacion_corte',
-            'dia_notificacion_preaviso',
-            'dia_suspension',
-            'estado',
-            'notificar_en_plataforma',
-            'notificar_al_correo',
         ],
     ]) ?>
 
