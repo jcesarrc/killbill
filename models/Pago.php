@@ -45,7 +45,7 @@ class Pago extends \yii\db\ActiveRecord
     public function rules()
     {
         return [
-            [['fecha_registro', 'fecha_pago', 'medio', 'valor', 'comprobante', 'academia'], 'required'],
+            [['fecha_pago', 'medio', 'valor', 'comprobante', 'academia'], 'required'],
             [['fecha_registro', 'fecha_pago'], 'safe'],
             [['medio', 'estado', 'academia'], 'integer'],
             [['valor'], 'number'],

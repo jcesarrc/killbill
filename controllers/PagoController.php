@@ -2,6 +2,7 @@
 
 namespace app\controllers;
 
+use app\models\Academia;
 use app\models\Pago;
 use app\models\PagoSearch;
 use Yii;
@@ -76,16 +77,38 @@ class PagoController extends Controller
      * If creation is successful, the browser will be redirected to the 'view' page.
      * @return mixed
      */
-    public function actionCreate()
+    public function actionCreate($academia = 0)
     {
-        $model = new Pago();
+        if (!isset($academia) || $academia == 0) {
 
-        if ($model->load(Yii::$app->request->post()) && $model->save()) {
-            return $this->redirect(['view', 'id' => $model->id, 'academia' => $model->academia]);
-        } else {
-            return $this->render('create', [
-                'model' => $model,
-            ]);
+            $model = new Pago();
+
+            if ($model->load(Yii::$app->request->post()) && $model->save()) {
+                return $this->redirect(['view', 'id' => $model->id, 'academia' => $model->academia]);
+            } else {
+                return $this->render('create', [
+                    'model' => $model,
+                ]);
+            }
+        } else if ($academia > 0) {
+
+            $model = new Pago();
+            $model->academia = $academia;
+            $searchModel = new PagoSearch();
+            $dataProvider = $searchModel->search(Yii::$app->request->queryParams);
+            $model_detalle_academia = Academia::findOne(['id' => $academia]);
+
+            if ($model->load(Yii::$app->request->post()) && $model->save()) {
+                return $this->redirect(['view', 'id' => $model->id, 'academia' => $model->academia]);
+            } else {
+                return $this->render('create', [
+                    'model' => $model,
+                    'model_detalle_academia' => $model_detalle_academia,
+                    'searchModel' => $searchModel,
+                    'dataProvider' => $dataProvider,
+                ]);
+            }
+
         }
     }
 

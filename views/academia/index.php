@@ -63,7 +63,7 @@ $this->params['breadcrumbs'][] = $this->title;
                 'label' => '$',
                 'format' => 'html',
                 'value' => function ($d) {
-                    return Html::a("$", Url::to(['pagos/index', 'id' => $d->id]), ["class" => "btn btn-xs btn-info"]);
+                    return Html::a("$", Url::to(['pago/create', 'academia' => $d->id]), ["class" => "btn btn-xs btn-info"]);
                 }
             ],
 

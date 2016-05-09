@@ -13,7 +13,6 @@ $this->params['breadcrumbs'][] = $this->title;
 <div class="pago-index">
 
     <h1><?= Html::encode($this->title) ?></h1>
-    <?php // echo $this->render('_search', ['model' => $searchModel]); ?>
 
     <p>
         <?= Html::a(Yii::t('app', 'Create Pago'), ['create'], ['class' => 'btn btn-success']) ?>
@@ -30,10 +29,9 @@ $this->params['breadcrumbs'][] = $this->title;
             'fecha_pago',
             'medio',
             'valor',
-            // 'estado',
-            // 'info:ntext',
-            // 'comprobante',
-            // 'academia',
+            'info:ntext',
+            'comprobante',
+            'academia',
 
             ['class' => 'yii\grid\ActionColumn'],
         ],
