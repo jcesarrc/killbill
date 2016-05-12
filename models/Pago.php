@@ -39,6 +39,25 @@ class Pago extends \yii\db\ActiveRecord
         return new PagoQuery(get_called_class());
     }
 
+    public static function calcularMesesDeuda($academia)
+    {
+        $objacademia = Academia::findOne(['id' => $academia]);
+        $hoy = new \DateTime();
+
+
+    }
+
+    public static function calcularPeriodoAPagar($academia)
+    {
+        $fecha_inicio_deuda = ;
+        $fecha_facturacion = ;
+    }
+
+    public static function calcularValorAPagar($academia)
+    {
+
+    }
+
     /**
      * @inheritdoc
      */
@@ -87,4 +106,5 @@ class Pago extends \yii\db\ActiveRecord
     {
         return $this->hasOne(Academia::className(), ['id' => 'academia']);
     }
+
 }

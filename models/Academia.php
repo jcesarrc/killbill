@@ -29,6 +29,7 @@ use Yii;
  * @property integer $notificar_presuspension_correo
  * @property integer $notificar_suspension_plataforma
  * @property integer $notificar_suspension_correo
+ * @property integer $mes_anticipado
  *
  * @property Pago[] $pagos
  */
@@ -59,7 +60,7 @@ class Academia extends \yii\db\ActiveRecord
         return [
             [['nombre', 'direccion', 'fecha_desde', 'email', 'dia_corte', 'costo_por_ciclo', 'fecha_inicial_facturacion', 'dia_notificacion_previa', 'dia_notificacion_presuspension', 'dia_suspension', 'notificar_previa_plataforma', 'notificar_previa_correo'], 'required'],
             [['fecha_desde', 'fecha_inicial_facturacion'], 'safe'],
-            [['numero_carros', 'numero_motos', 'dia_notificacion_previa', 'dia_notificacion_presuspension', 'dia_suspension', 'estado', 'notificar_previa_plataforma', 'notificar_previa_correo', 'notificar_corte_plataforma', 'notificar_corte_correo', 'notificar_presuspension_plataforma', 'notificar_presuspension_correo', 'notificar_suspension_plataforma', 'notificar_suspension_correo'], 'integer'],
+            [['mes_anticipado', 'numero_carros', 'numero_motos', 'dia_notificacion_previa', 'dia_notificacion_presuspension', 'dia_suspension', 'estado', 'notificar_previa_plataforma', 'notificar_previa_correo', 'notificar_corte_plataforma', 'notificar_corte_correo', 'notificar_presuspension_plataforma', 'notificar_presuspension_correo', 'notificar_suspension_plataforma', 'notificar_suspension_correo'], 'integer'],
             [['costo_por_ciclo'], 'number'],
             [['nombre', 'direccion', 'email'], 'string', 'max' => 255],
             [['nombre'], 'unique'],
@@ -94,6 +95,7 @@ class Academia extends \yii\db\ActiveRecord
             'notificar_presuspension_correo' => Yii::t('app', 'Notificar Presuspension Correo'),
             'notificar_suspension_plataforma' => Yii::t('app', 'Notificar Suspension Plataforma'),
             'notificar_suspension_correo' => Yii::t('app', 'Notificar Suspension Correo'),
+            'mes_anticipado' => Yii::t('app', 'Tipo de cobro'),
         ];
 
     }

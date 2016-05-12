@@ -38,8 +38,7 @@ class MedioPago extends \yii\db\ActiveRecord
     public function rules()
     {
         return [
-            [['id', 'nombre'], 'required'],
-            [['id'], 'integer'],
+            [['nombre'], 'required'],
             [['info'], 'string'],
             [['nombre'], 'string', 'max' => 45]
         ];

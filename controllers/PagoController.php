@@ -79,37 +79,31 @@ class PagoController extends Controller
      */
     public function actionCreate($academia = 0)
     {
-        if (!isset($academia) || $academia == 0) {
 
-            $model = new Pago();
+        $model = new Pago();
+        $model->academia = $academia;
+        $searchModel = new PagoSearch();
+        $dataProvider = $searchModel->search(Yii::$app->request->queryParams);
+        $model_detalle_academia = Academia::findOne(['id' => $academia]);
 
-            if ($model->load(Yii::$app->request->post()) && $model->save()) {
-                return $this->redirect(['view', 'id' => $model->id, 'academia' => $model->academia]);
-            } else {
-                return $this->render('create', [
-                    'model' => $model,
-                ]);
-            }
-        } else if ($academia > 0) {
+        $meses_a_pagar = Pago::calcularMesesDeuda($academia);
+        $periodo_a_pagar = Pago::calcularPeriodoAPagar($academia);
+        $valor_a_pagar = Pago::calcularValorAPagar($academia);
 
-            $model = new Pago();
-            $model->academia = $academia;
-            $searchModel = new PagoSearch();
-            $dataProvider = $searchModel->search(Yii::$app->request->queryParams);
-            $model_detalle_academia = Academia::findOne(['id' => $academia]);
-
-            if ($model->load(Yii::$app->request->post()) && $model->save()) {
-                return $this->redirect(['view', 'id' => $model->id, 'academia' => $model->academia]);
-            } else {
-                return $this->render('create', [
-                    'model' => $model,
-                    'model_detalle_academia' => $model_detalle_academia,
-                    'searchModel' => $searchModel,
-                    'dataProvider' => $dataProvider,
-                ]);
-            }
-
+        if ($model->load(Yii::$app->request->post()) && $model->save()) {
+            return $this->refresh();
+        } else {
+            return $this->render('create', [
+                'model' => $model,
+                'model_detalle_academia' => $model_detalle_academia,
+                'meses_a_pagar' => $meses_a_pagar,
+                'periodo_a_pagar' => $periodo_a_pagar,
+                'valor_a_pagar' => $valor_a_pagar,
+                'searchModel' => $searchModel,
+                'dataProvider' => $dataProvider,
+            ]);
         }
+
     }
 
     /**

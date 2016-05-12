@@ -46,7 +46,6 @@ use yii\widgets\DetailView;
                     'model' => $model_detalle_academia,
                     'attributes' => [
                         'nombre',
-                        'email:email',
                         [
                             'attribute' => 'dia_corte',
                             'value' => $model_detalle_academia->dia_corte . ' de cada mes',
@@ -54,6 +53,16 @@ use yii\widgets\DetailView;
                         'costo_por_ciclo:currency',
                     ],
                 ]) ?>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-lg-3">
+                Valor a pagar: <?= $valor_a_pagar ?>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-lg-3">
+                Periodo: <?= $periodo_a_pagar ?>
             </div>
         </div>
 

@@ -87,8 +87,13 @@ use yii\widgets\ActiveForm;
         </div>
         <div class="panel-body">
 
-            <table class="table">
+            <div class="row">
+                <div class="col-lg-6">
+                    <?= $form->field($model, 'mes_anticipado')->radioList([true => 'Mes anticipado', false => 'Mes vencido']) ?>
+                </div>
+            </div>
 
+            <table class="table">
 
                 <tr>
                     <th width="25%">Evento</th>
@@ -99,9 +104,9 @@ use yii\widgets\ActiveForm;
                 </tr>
 
                 <tr>
-                    <td>Notificación previa a la fecha de corte</td>
+                    <td>Envío de la factura</td>
                     <td><?= $form->field($model, 'dia_notificacion_previa')->textInput(['maxlength' => true])->label(false) ?></td>
-                    <td><?= Html::tag('span', 'días antes de la fecha de corte') ?></td>
+                    <td><?= Html::tag('span', ' días antes del vencimiento de la factura') ?></td>
                     <td><?= $form->field($model, 'notificar_previa_plataforma')->widget(SwitchInput::classname(), [
                             'pluginOptions' => [
                                 'size' => 'small',
@@ -120,7 +125,7 @@ use yii\widgets\ActiveForm;
 
 
                 <tr>
-                    <td>Día de corte</td>
+                    <td>Vencimiento de la factura</td>
                     <td><?= $form->field($model, 'dia_corte')->textInput(['maxlength' => true])->label(false) ?></td>
                     <td><?= Html::tag('span', 'de cada mes') ?></td>
                     <td>
@@ -143,9 +148,9 @@ use yii\widgets\ActiveForm;
 
 
                 <tr>
-                    <td>Día de preaviso de suspensión</td>
+                    <td>Preaviso de suspensión</td>
                     <td><?= $form->field($model, 'dia_notificacion_presuspension')->textInput(['maxlength' => true])->label(false) ?></td>
-                    <td><?= Html::tag('span', 'días después de la fecha de corte') ?></td>
+                    <td><?= Html::tag('span', 'días después del vencimiento de la factura') ?></td>
                     <td><?= $form->field($model, 'notificar_presuspension_plataforma')->widget(SwitchInput::classname(), [
                             'pluginOptions' => [
                                 'size' => 'small',
@@ -165,9 +170,9 @@ use yii\widgets\ActiveForm;
                 </tr>
 
                 <tr>
-                    <td>Día de suspensión</td>
+                    <td>Suspensión</td>
                     <td><?= $form->field($model, 'dia_suspension')->textInput(['maxlength' => true])->label(false) ?></td>
-                    <td><?= Html::tag('span', 'días después de la fecha de corte') ?></td>
+                    <td><?= Html::tag('span', 'días después del vencimiento de la factura') ?></td>
                     <td><?= $form->field($model, 'notificar_suspension_plataforma')->widget(SwitchInput::classname(), [
                             'pluginOptions' => [
                                 'size' => 'small',

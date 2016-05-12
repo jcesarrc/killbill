@@ -1,5 +1,6 @@
 <?php
 
+use app\models\MedioPago;
 use yii\grid\GridView;
 use yii\helpers\Html;
 
@@ -18,6 +19,9 @@ $this->params['breadcrumbs'][] = $this->title;
     <?= $this->render('_form', [
         'model' => $model,
         'model_detalle_academia' => $model_detalle_academia,
+        'valor_a_pagar' => $valor_a_pagar,
+        'periodo_a_pagar' => $periodo_a_pagar,
+        'meses_a_pagar' => $meses_a_pagar,
     ]) ?>
 
     <h1><?= Html::encode("Historial de Pagos") ?></h1>
@@ -28,17 +32,16 @@ $this->params['breadcrumbs'][] = $this->title;
         'columns' => [
             ['class' => 'yii\grid\SerialColumn'],
 
-            'fecha_registro:date',
             'fecha_pago:date',
             [
                 'attribute' => 'medio',
                 'value' => function ($d) {
-                    return MedioPago::findOne(['id' => $d->id])->nombre;
+                    return MedioPago::findOne(['id' => $d->medio])->nombre;
                 }
             ],
             'valor:currency',
-            'info:ntext',
             'comprobante',
+            'info:ntext',
 
             ['class' => 'yii\grid\ActionColumn'],
         ],
